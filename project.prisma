@@ -1,0 +1,26 @@
+datasource sqlite {
+  provider = "sqlite"
+  url      = "file:my.db"
+}
+
+generator photonjs {
+  provider = "photonjs"
+}
+
+generator nexus_prisma {
+  provider = "nexus-prisma"
+}
+
+model User {
+  id    String  @id @default(cuid())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        String  @id @default(cuid())
+  title     String
+  published Boolean @default(true)
+  author    User?
+}
